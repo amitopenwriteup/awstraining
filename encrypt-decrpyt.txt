@@ -1,0 +1,44 @@
+ - Create the secret text
+
+$ sudo echo "Sample Secret Text to Encrypt" > samplesecret.t
+
+
+-Generate the data key
+
+$ aws kms generate-data-key --key-id alias/demokmskey  --key-spec AES_256 --region us-east-1 --encryption-context project=workshop
+
+// check your output
+{
+    "Plaintext": "97**********FEFE*ROL****************OOL", 
+    "KeyId": "arn:aws:kms:eu-west-1:-your-account.id:key/-KeyId-used-to-encrypt", 
+    "CiphertextBlob": "*********************+**********M05/D********************************************D12bL*****2A**"
+}
+
+//
+
+- Encrypt the secret text (Put your plaintext and cipertextblob from above command)
+
+$ echo '97**********FEFE*ROL****************OOL' | base64 --decode > datakeyPlainText.txt
+
+$ echo '*********************+**********M05/D********************************************D12bL*****2A**' | base64 --decode > datakeyEncrypted.txt
+
+
+- Encrypt file
+
+$ openssl enc -e -aes256 -in samplesecret.txt -out encryptedSecret.txt -k fileb://datakeyPlainText.txt  
+
+Decrypt
+
+$ aws kms  decrypt --encryption-context project=workshop --ciphertext-blob fileb://datakeyEncrypted.txt
+{
+    "Plaintext": "97**********FEFE*ROL****************OOL", 
+    "KeyId": "arn:aws:kms:eu-west-1:your-account-id:key/your-imported-key-id"
+}
+
+
+
+$ echo '97**********FEFE*ROL****************OOL' | base64 --decode > datakeyPlainText.txt
+
+
+$  openssl enc -d -aes256 -in encryptedSecret.txt -k fileb://datakeyPlainText.txt
+Sample Secret Text to Encrypt
