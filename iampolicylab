@@ -1,0 +1,120 @@
+Write an IAM policy that allows you to synchronize all objects from a specific S3 bucket.
+
+aws s3 sync s3://<S3Bucket> ~/
+Policy json file
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::<S3Bucket>"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::<S3Bucket>/*"
+    }
+  ]
+}
+
+----------------------------------
+
+S3 read and write with prefix
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::<S3Bucket>/lab/*"
+    }
+  ]
+}
+
+--------------------------------
+Write an IAM policy that allows to read all parameters by a specific path.
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ssm:GetParametersByPath",
+      "Resource": "arn:aws:ssm:<Region>:<AWSAccountId>:parameter/<CloudFormationStackName>/a/*"
+    }
+  ]
+}
+
+----------------------------------------------------------------
+
+Write an IAM policy that only allows to terminate instances with a specific tag key and tag value.
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:TerminateInstances",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/environment": "test"
+        }
+      }
+    }
+  ]
+}
+
+--------------------------------------
+
+IaM policy that allows to launch EC2 instances only when a tag with key  costcenter is set.
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:RunInstances",
+      "Resource": [
+        "arn:aws:ec2:*:*:volume/*",
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/costcenter": "false"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ec2:RunInstances",
+      "NotResource": [
+        "arn:aws:ec2:*:*:volume/*",
+        "arn:aws:ec2:*:*:instance/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ec2:CreateTags",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction": [
+            "RunInstances"
+          ]
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
