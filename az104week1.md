@@ -7,7 +7,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## 🔐 Microsoft Entra ID (Azure AD)
+##  Microsoft Entra ID (Azure AD)
 
 **Q1. What is Microsoft Entra ID and how does it differ from on-premises Active Directory?**
 > Microsoft Entra ID is a cloud-based identity and access management service. Unlike on-premises AD (which uses LDAP, Kerberos, and manages domain-joined machines), Entra ID is designed for cloud/SaaS apps using protocols like OAuth 2.0, OIDC, and SAML. It doesn't support Group Policy Objects (GPOs) or traditional OU structures.
@@ -35,7 +35,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## 👥 Users, Groups & Devices
+##  Users, Groups & Devices
 
 **Q6. What are the types of groups in Entra ID?**
 > - **Security Groups**: Used to assign permissions and access to resources.
@@ -56,7 +56,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## 🛡️ Role-Based Access Control (RBAC)
+##  Role-Based Access Control (RBAC)
 
 **Q8. What are the three built-in RBAC roles and what can each do?**
 > - **Owner**: Full access + can manage role assignments
@@ -86,7 +86,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## 📜 Azure Policy
+##  Azure Policy
 
 **Q12. What is Azure Policy and what problems does it solve?**
 > Azure Policy is a governance tool that enforces organizational rules on Azure resources. It solves problems like unauthorized region deployments, missing mandatory tags, use of unapproved SKUs, and non-compliant resource configurations. It can **audit**, **deny**, or **auto-remediate** resources.
@@ -111,7 +111,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## 🔒 Resource Locks
+##  Resource Locks
 
 **Q15. What are the two types of Resource Locks and how do they differ?**
 > | Lock Type | Can Modify? | Can Delete? |
@@ -156,7 +156,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## 🏷️ Tags & Cost Management
+## Tags & Cost Management
 
 **Q21. What are Azure Tags and what are their limitations?**
 > Tags are **key-value pairs** applied to resources for organization, cost tracking, and automation. Limitations:
@@ -181,7 +181,7 @@ Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
-## ⚡ Scenario-Based Questions
+##  Scenario-Based Questions
 
 **Q24. A junior admin accidentally deleted a production database. How could this have been prevented?**
 > Apply a **`CanNotDelete` Resource Lock** on the database resource or its Resource Group. This would have blocked the deletion regardless of the admin's RBAC role. Combined with RBAC least privilege (assigning only the minimum required role), the risk is minimized.
