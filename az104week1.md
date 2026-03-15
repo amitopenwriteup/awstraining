@@ -1,4 +1,3 @@
-Here are **AZ-104 Session 1 interview questions** in markdown format:
 
 ---
 
